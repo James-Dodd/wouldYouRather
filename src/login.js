@@ -6,25 +6,20 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import Button from "@mui/material/Button";
 import FormControl from "@mui/material/FormControl";
-import { useNavigate } from "react-router-dom";
 import { allActions } from "./actions/combinedActions";
 import Header from "./components/Header";
 
 const LoginPage = () => {
   const [user, setUser] = useState("");
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const users = useSelector((state) => state.users);
   const userauth = useSelector((state) => state.userAuth);
-  console.log("here is users ---->", users);
-  console.log("here is user auth---->", userauth);
   const usersSelectHandle = (obj) => {
     const temparr = [];
     Object.entries(obj).map(([key, value]) => {
       temparr.push({ name: value.name, id: value.id });
       return null;
     });
-    console.log(temparr);
     return temparr;
   };
   const usersHandled = usersSelectHandle(users);
@@ -34,13 +29,28 @@ const LoginPage = () => {
   const subButton = () => {
     dispatch(allActions.userAuthActions.setUserAuth(user));
   };
-  if (userauth !== null) {
-    navigate("/home");
-  }
 
   return (
     <div sx={{ backgroundColor: "#FCF7FF" }}>
-      <Header />
+      <div
+      style={{
+        backgroundColor: "#59D2FE",
+        paddingTop: "10px",
+        paddingBottom: "20px",
+        maxHeight: "100px",
+      }}
+    >
+      <h1
+        style={{
+          margin: "auto",
+          marginTop: "10px",
+          marginLeft: "10px",
+          marginRight: "10px",
+        }}
+      >
+        Would You Rather
+      </h1>
+      </div>
       <Box
         sx={{
           minWidth: 120,

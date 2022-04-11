@@ -8,7 +8,6 @@ const getUsers = (users) => {
 };
 
 const addQuestionToUser = (id, author) => {
-  console.log("here is id from user question --->", id, author);
   return {
     type: actionTypes.ADD_QUESTION_TO_USER,
     payload: {

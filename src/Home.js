@@ -9,12 +9,14 @@ import Header from "./components/Header";
 import QuestionCard from "./components/Cards/QuestionCard";
 import { useSelector } from "react-redux";
 import QuestionsForm from "./components/QuestionsForm";
+import Leaderboard from "./components/LeaderBoard";
 
 const Home = () => {
   const [tabValue, setTabValue] = useState("1");
   const navigate = useNavigate();
   const questionsPre = useSelector((state) => state.questions);
   const userauth = useSelector((state) => state.userAuth);
+  const userstemp = useSelector((state) => state.users);
   const handleChange = (e, newValue) => {
     setTabValue(newValue);
   };
@@ -24,35 +26,59 @@ const Home = () => {
       temparr.push(value);
       return null;
     });
-    console.log(temparr);
+    return temparr;
+  };
+  const usersHandler = (obj) => {
+    const temparr = [];
+    Object.entries(obj).map(([key, value]) => {
+      temparr.push({
+        id: key,
+        score: Object.keys(value.answers).length + value.questions.length,
+      });
+      return null;
+    });
+    temparr.sort((a, b) => b.score - a.score);
     return temparr;
   };
   if (userauth === null) {
     navigate("/");
   }
+  const users = usersHandler(userstemp);
   const questions = questionHandler(questionsPre);
-  console.log("here is questions ---->", questions);
   return (
     <div>
       <Header />
-      <Box sx={{ width: "100%", typography: "body1" }}>
+      <Box
+        sx={{
+          width: "100%",
+          typography: "body1",
+          margin: "auto",
+          marginTop: "50px",
+        }}
+      >
         <TabContext value={tabValue}>
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
             <TabList onChange={handleChange} aria-label="lab API tabs example">
-              <Tab label="Home" value="1" />
-              <Tab label="New Question" value="2" />
-              <Tab label="Leaderboard" value="3" />
+              <Tab label="Unread" value="1" />
+              <Tab label="Read" value="2" />
             </TabList>
           </Box>
           <TabPanel value="1">
-            {questions.map((a) => (
-              <QuestionCard question={a} />
-            ))}
+            {questions.map((a) =>
+              a.optionOne.votes.includes(userauth) ||
+              a.optionTwo.votes.includes(userauth) ? null : (
+                <QuestionCard question={a.id} />
+              )
+            )}
           </TabPanel>
           <TabPanel value="2">
-            <QuestionsForm />
+            {questions.map((a) =>
+              a.optionOne.votes.includes(userauth) ||
+              a.optionTwo.votes.includes(userauth) ? (
+                <QuestionCard question={a.id} />
+              ) : null
+            )}
           </TabPanel>
-          <TabPanel value="3">Leaderboard</TabPanel>
         </TabContext>
       </Box>
     </div>

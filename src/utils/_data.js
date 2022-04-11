@@ -151,7 +151,6 @@ function formatQuestion({ valueA, valueB, userId }) {
 }
 
 export function _saveQuestion(question) {
-  console.log(question);
   return new Promise((res, rej) => {
     const formattedQuestion = formatQuestion(question);
     const authedUser = formattedQuestion.author;
