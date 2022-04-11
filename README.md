@@ -1,5 +1,5 @@
 # Would You Rather
-welcome to my would you rather appp the instructions for the app are below 
+welcome to my would you rather app the instructions for the app are below 
 there are four pages:
 home
 question
