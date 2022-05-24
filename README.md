@@ -1,3 +1,11 @@
+# Would You Rather
+welcome to my would you rather app the instructions for the app are below 
+there are four pages:
+home
+question
+new question
+leaderboard
+be sure to check them all out 
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
