@@ -10,6 +10,7 @@ const Leaderboard = (userId) => {
   const users = useSelector((state) => state.users);
   return (
     <Card
+      key={userId.userId}
       sx={{
         margin: "auto",
         border: "3px",
@@ -24,12 +25,10 @@ const Leaderboard = (userId) => {
     >
       <CardHeader
         avatar={
-          <Avatar sx={{ bgcolor:'green' }}>
-            {users[userId.userId].name
-              .split(" ")
-              .map((word) => word[0])
-              .join("")}
-          </Avatar>
+          <Avatar
+          key={userId.userId}
+            src={`${process.env.PUBLIC_URL}${users[userId.userId].avatarURL}`}
+          />
         }
         title={`author: ${users[userId.userId].name}`}
       />

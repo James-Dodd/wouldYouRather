@@ -105,12 +105,9 @@ const QuestionCard = (question) => {
         <>
           <CardHeader
             avatar={
-              <Avatar sx={{ bgcolor: "green" }}>
-                {users[quest.author].name
-                  .split(" ")
-                  .map((word) => word[0])
-                  .join("")}
-              </Avatar>
+              <Avatar 
+              src={`${process.env.PUBLIC_URL}${users[quest.author].avatarURL}`}
+              />
             }
             title={`author: ${users[quest.author].name}`}
           />
@@ -139,12 +136,11 @@ const QuestionCard = (question) => {
               </Typography>
               {quest.optionOne.votes.includes(loggedinuser) ||
               quest.optionTwo.votes.includes(loggedinuser) ? null : (
-                <IconButton aria-label="upVote">
+                <IconButton onClick={() => {
+                  voteHandler("1");
+                }} aria-label="upVote">
                   <Chip
                     label="Vote"
-                    onClick={() => {
-                      voteHandler("1");
-                    }}
                     icon={<CheckCircleIcon style={{ fill: "#00FF08" }} />}
                   />
                 </IconButton>
@@ -174,12 +170,11 @@ const QuestionCard = (question) => {
               </Typography>
               {quest.optionOne.votes.includes(loggedinuser) ||
               quest.optionTwo.votes.includes(loggedinuser) ? null : (
-                <IconButton aria-label="upVote">
+                <IconButton onClick={() => {
+                  voteHandler("2");
+                }} aria-label="upVote">
                   <Chip
                     label="Vote"
-                    onClick={() => {
-                      voteHandler("2");
-                    }}
                     icon={<CheckCircleIcon style={{ fill: "#00FF08" }} />}
                   />
                 </IconButton>

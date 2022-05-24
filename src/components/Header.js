@@ -12,7 +12,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { allActions } from "../actions/combinedActions";
 const Header = () => {
   const location = useLocation();
-  const [tabValue, setTabValue] = useState(location.pathname);
+  const [tabValue, setTabValue] = useState(location.pathname.includes('questions')?"/":location.pathname);
   const users = useSelector((state) => state.users);
   const loggedinuser = useSelector((state) => state.userAuth);
   const navigate = useNavigate();
@@ -47,12 +47,9 @@ const Header = () => {
           <div style={{ display: "flex", flexDirection: "row" }}>
             <CardHeader
               avatar={
-                <Avatar sx={{ bgcolor: "green" }}>
-                  {user.name
-                    .split(" ")
-                    .map((word) => word[0])
-                    .join("")}
-                </Avatar>
+                <Avatar 
+                src={`${process.env.PUBLIC_URL}${user.avatarURL}`}
+                />
               }
               title={user.name}
               style={{ marginLeft: "10px" }}

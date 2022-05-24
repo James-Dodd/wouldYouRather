@@ -78,7 +78,7 @@ const QuestionsForm = () => {
             <Button
               variant="contained"
               sx={{
-                maxWidth: 100,
+                maxWidth: 400,
                 marginTop: "10px",
                 marginLeft: "13cm",
                 background: "#FCF7FF",
@@ -87,7 +87,7 @@ const QuestionsForm = () => {
               // type="submit"
               onClick={handleSubmit}
             >
-              Log In
+              Submit
             </Button>
           </FormControl>
         </form>

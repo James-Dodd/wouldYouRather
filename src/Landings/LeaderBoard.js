@@ -23,7 +23,7 @@ const LeaderBoard = () => {
       <Header />
       <div style={{ marign: "auto", marginTop: "100px" }}>
         {users.map((a) => (
-          <Leaderboard userId={a.id} />
+          <Leaderboard key={a.id} userId={a.id} />
         ))}
       </div>
     </>

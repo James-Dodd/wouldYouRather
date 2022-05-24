@@ -26,6 +26,8 @@ const Home = () => {
       temparr.push(value);
       return null;
     });
+    temparr.sort((a,b)=> b.timestamp - a.timestamp)
+    console.log('here is temparr --->', temparr)
     return temparr;
   };
   const usersHandler = (obj) => {
@@ -59,15 +61,15 @@ const Home = () => {
         <TabContext value={tabValue}>
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
             <TabList onChange={handleChange} aria-label="lab API tabs example">
-              <Tab label="Unread" value="1" />
-              <Tab label="Read" value="2" />
+              <Tab label="UNANSWERED" value="1" />
+              <Tab label="ANSWERED" value="2" />
             </TabList>
           </Box>
           <TabPanel value="1">
             {questions.map((a) =>
               a.optionOne.votes.includes(userauth) ||
               a.optionTwo.votes.includes(userauth) ? null : (
-                <QuestionCard question={a.id} />
+                <QuestionCard key={a.id} question={a.id} />
               )
             )}
           </TabPanel>
@@ -75,7 +77,7 @@ const Home = () => {
             {questions.map((a) =>
               a.optionOne.votes.includes(userauth) ||
               a.optionTwo.votes.includes(userauth) ? (
-                <QuestionCard question={a.id} />
+                <QuestionCard key={a.id} question={a.id} />
               ) : null
             )}
           </TabPanel>
